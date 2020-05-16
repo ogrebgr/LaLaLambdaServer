@@ -1,0 +1,64 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.jetbrains.kotlin.jvm'
+}
+apply plugin: 'kotlin-kapt'
+
+group 'org.example.kforge'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    jcenter()
+    mavenCentral()
+    mavenLocal()
+}
+
+// If you need auto-incrementing version on each "distribution" task - uncomment lines bellow and rename
+// version.properties.sample to version.properties
+//def versionPropsFile = file('version.properties')
+//
+//def code
+//if (versionPropsFile.canRead()) {
+//    Properties versionProps = new Properties()
+//
+//    versionProps.load(new FileInputStream(versionPropsFile))
+//
+//    code = versionProps['VERSION_CODE'].toInteger() + 1
+//
+//    versionProps['VERSION_CODE']=code.toString()
+//    versionProps.store(versionPropsFile.newWriter(), null)
+//} else {
+//    throw new GradleException("Could not read version.properties!")
+//}
+//// delete 'version '1.0-SNAPSHOT'' above
+//version '1.0.0-' + code
+
+
+
+dependencies {
+    api project(':LaLaLambda')
+    api project(':myLambdas')
+    compile 'com.google.code.gson:gson:2.8.5'
+    compile group: 'commons-cli', name: 'commons-cli', version: '1.4'
+    compile 'org.slf4j:slf4j-api:1.7.21'
+    compile "ch.qos.logback:logback-classic:1.2.3"
+    compile 'com.bolyartech.forge.server:forge-server-jetty:8.4.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation 'com.google.dagger:dagger:2.18'
+    kapt 'com.google.dagger:dagger-compiler:2.18'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+application {
+    mainClassName = 'org.example.kforge.La3Server'
+}
