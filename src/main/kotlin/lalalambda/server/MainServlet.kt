@@ -1,4 +1,4 @@
-package org.example.kforge
+package lalalambda.server
 
 import com.bolyartech.forge.server.BaseServletDefaultImpl
 import com.bolyartech.forge.server.handler.RouteHandler
