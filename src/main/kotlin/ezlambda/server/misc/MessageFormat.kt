@@ -1,4 +1,4 @@
-package lalalambda.server.misc
+package ezlambda.server.misc
 
 import org.slf4j.helpers.MessageFormatter
 

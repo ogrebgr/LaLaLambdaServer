@@ -1,4 +1,4 @@
-package lalalambda.server.misc
+package ezlambda.server.misc
 
 import java.time.Instant
 import java.time.LocalDateTime

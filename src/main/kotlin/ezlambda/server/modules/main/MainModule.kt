@@ -1,16 +1,14 @@
-package com.bolyartech.totoproverka3.server.main
+package ezlambda.server.modules.main
 
 import com.bolyartech.forge.server.HttpMethod
 import com.bolyartech.forge.server.module.HttpModule
 import com.bolyartech.forge.server.route.Route
 import com.bolyartech.forge.server.route.RouteImpl
-import lalalambda.aws.AwsLambdaDispatcher
-import lalalambda.server.modules.main.endpoints.AwsLambdaEp
-import lalalambda.server.modules.main.endpoints.SimpleLambdaEp
-import lalalambda.simple.SimpleLambdaDispatcher
+import ezlambda.server.modules.main.endpoints.SimpleLambdaEp
+import ezlambda.simple.SimpleLambdaDispatcher
 import java.util.*
 
-class MainModule constructor(private val disAws: AwsLambdaDispatcher, private val disSimple: SimpleLambdaDispatcher) :
+class MainModule constructor(private val disSimple: SimpleLambdaDispatcher) :
     HttpModule {
     companion object {
 
@@ -23,13 +21,7 @@ class MainModule constructor(private val disAws: AwsLambdaDispatcher, private va
     override fun createRoutes(): List<Route> {
         val ret = ArrayList<Route>()
 
-        val epAws = AwsLambdaEp(disAws)
         val epSimple = SimpleLambdaEp(disSimple)
-        ret.add(RouteImpl(HttpMethod.GET, PATH_PREFIX + "aws", epAws))
-        ret.add(RouteImpl(HttpMethod.POST, PATH_PREFIX + "aws", epAws))
-        ret.add(RouteImpl(HttpMethod.PUT, PATH_PREFIX + "aws", epAws))
-        ret.add(RouteImpl(HttpMethod.DELETE, PATH_PREFIX + "aws", epAws))
-
         ret.add(RouteImpl(HttpMethod.GET, PATH_PREFIX, epSimple))
         ret.add(RouteImpl(HttpMethod.POST, PATH_PREFIX, epSimple))
         ret.add(RouteImpl(HttpMethod.PUT, PATH_PREFIX, epSimple))

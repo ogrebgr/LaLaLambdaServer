@@ -1,4 +1,4 @@
-package com.bolyartech.totoproverka3.server.main
+package ezlambda.server.misc
 
 import com.bolyartech.forge.server.response.Response
 import com.bolyartech.forge.server.response.ResponseException

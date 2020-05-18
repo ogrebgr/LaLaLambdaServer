@@ -1,12 +1,36 @@
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.72"
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+    }
+}
+
+
 plugins {
-    id 'java'
-    id 'application'
-    id 'org.jetbrains.kotlin.jvm'
+    id 'java-library'
+    id 'maven-publish'
+}
+
+def kotlinPluginId = 'org.jetbrains.kotlin.jvm'
+final hasPlugin = project.getPlugins().hasPlugin(kotlinPluginId);
+if (hasPlugin) {
+    final Plugin plugin = project.getPlugins().getPlugin(kotlinPluginId)
+    println 'Plugin already applied - version ' + plugin.properties['kotlinPluginVersion']
+} else {
+    apply plugin: "org.jetbrains.kotlin.jvm"
 }
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.jfrog.bintray'
+ext {
+    ezlambda_server_version = '1.0.0'
+}
 
-group 'org.example.kforge'
-version '1.0-SNAPSHOT'
+group 'ezlambda'
+version ezlambda_server_version
 
 sourceCompatibility = 1.8
 
@@ -16,31 +40,10 @@ repositories {
     mavenLocal()
 }
 
-// If you need auto-incrementing version on each "distribution" task - uncomment lines bellow and rename
-// version.properties.sample to version.properties
-//def versionPropsFile = file('version.properties')
-//
-//def code
-//if (versionPropsFile.canRead()) {
-//    Properties versionProps = new Properties()
-//
-//    versionProps.load(new FileInputStream(versionPropsFile))
-//
-//    code = versionProps['VERSION_CODE'].toInteger() + 1
-//
-//    versionProps['VERSION_CODE']=code.toString()
-//    versionProps.store(versionPropsFile.newWriter(), null)
-//} else {
-//    throw new GradleException("Could not read version.properties!")
-//}
-//// delete 'version '1.0-SNAPSHOT'' above
-//version '1.0.0-' + code
-
-
 
 dependencies {
-    api project(':LaLaLambda')
-    api project(':myLambdas')
+//    api project(':ezlambda')
+    api 'ezlambda:ezlambda:1.0.0'
     compile 'com.google.code.gson:gson:2.8.5'
     compile group: 'commons-cli', name: 'commons-cli', version: '1.4'
     compile 'org.slf4j:slf4j-api:1.7.21'
@@ -59,6 +62,47 @@ compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
 
-application {
-    mainClassName = 'org.example.kforge.La3Server'
+
+// custom tasks for creating source/javadoc jars
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives sourcesJar//, javadocJar
+}
+
+apply from: 'bintray-config.gradle'
+
+publishing {
+    publications {
+        MyPublication(MavenPublication) {
+            from components.java
+            groupId 'ezlambda'
+            artifactId 'ezlambda-server'
+            version ezlambda_server_version
+            artifact sourcesJar
+        }
+    }
+}
+
+
+bintray {
+    configurations = ['archives']
+    pkg {
+        repo = 'maven'
+        name = 'ezlambda-server'
+        userOrg = 'ogibankov'
+        licenses = ['Apache-2.0']
+        websiteUrl = 'https://github.com/ogrebgr/ezlambda-server'
+        issueTrackerUrl = 'https://github.com/ogrebgr/ezlambda-server/issues'
+        vcsUrl = 'git@github.com:ogrebgr/ezlambda-server.git'
+        version {
+            name = ezlambda_server_version
+            desc = 'ezLambda Local Server'
+            vcsTag = 'v' + ezlambda_server_version
+        }
+    }
+    publications = ['MyPublication']
 }

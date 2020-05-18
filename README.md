@@ -1,1 +1,1 @@
-# LaLaLambdaServer
+# ezLambdaServer

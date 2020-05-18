@@ -1,11 +1,11 @@
-package lalalambda.server.modules.main.endpoints
+package ezlambda.server.modules.main.endpoints
 
 
 import com.amazonaws.services.lambda.runtime.events.APIGatewayV2ProxyRequestEvent
 import com.bolyartech.forge.server.handler.RouteHandler
 import com.bolyartech.forge.server.response.Response
 import com.bolyartech.forge.server.route.RequestContext
-import lalalambda.simple.SimpleLambdaDispatcher
+import ezlambda.simple.SimpleLambdaDispatcher
 
 class SimpleLambdaEp constructor(private val dis: SimpleLambdaDispatcher) : RouteHandler {
     override fun handle(ctx: RequestContext): Response {

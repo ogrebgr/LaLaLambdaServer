@@ -1,4 +1,4 @@
-package lalalambda.server
+package ezlambda.server
 
 import com.bolyartech.forge.server.BaseServletDefaultImpl
 import com.bolyartech.forge.server.handler.RouteHandler

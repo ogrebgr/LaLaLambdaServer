@@ -1,10 +1,10 @@
-package lalalambda.server
+package ezlambda.server
 
 import com.bolyartech.forge.server.handler.RouteHandler
 import com.bolyartech.forge.server.jetty.ForgeJetty
 import com.bolyartech.forge.server.jetty.ForgeJettyConfiguration
 import com.bolyartech.forge.server.module.HttpModule
-import com.bolyartech.totoproverka3.server.main.MainModule
+import ezlambda.server.modules.main.MainModule
 import java.util.*
 import javax.inject.Inject
 import javax.servlet.http.HttpServlet

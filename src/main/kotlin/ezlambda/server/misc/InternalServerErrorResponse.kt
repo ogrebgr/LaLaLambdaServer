@@ -1,4 +1,4 @@
-package lalalambda.server.misc
+package ezlambda.server.misc
 
 import com.bolyartech.forge.server.response.Response
 import com.bolyartech.forge.server.response.ResponseException

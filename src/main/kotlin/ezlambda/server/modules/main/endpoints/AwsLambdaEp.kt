@@ -1,4 +1,4 @@
-package lalalambda.server.modules.main.endpoints
+package ezlambda.server.modules.main.endpoints
 
 import com.amazonaws.services.lambda.runtime.ClientContext
 import com.amazonaws.services.lambda.runtime.CognitoIdentity
@@ -11,8 +11,8 @@ import com.bolyartech.forge.server.response.Response
 import com.bolyartech.forge.server.route.RequestContext
 import com.google.common.io.ByteStreams
 import com.google.gson.Gson
-import lalalambda.aws.AwsLambdaDispatcher
-import lalalambda.aws.AwsRequestEvent
+import ezlambda.aws.AwsLambdaDispatcher
+import ezlambda.aws.AwsRequestEvent
 import java.io.ByteArrayInputStream
 import java.io.InputStream
 import javax.servlet.http.HttpServletResponse
