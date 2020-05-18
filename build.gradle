@@ -29,7 +29,7 @@ ext {
     ezlambda_server_version = '1.0.0'
 }
 
-group 'ezlambda'
+group 'com.bolyartech.ezlambda'
 version ezlambda_server_version
 
 sourceCompatibility = 1.8
@@ -43,7 +43,7 @@ repositories {
 
 dependencies {
 //    api project(':ezlambda')
-    api 'ezlambda:ezlambda:1.0.0'
+    api 'com.bolyartech.ezlambda:ezlambda:1.0.0'
     compile 'com.google.code.gson:gson:2.8.5'
     compile group: 'commons-cli', name: 'commons-cli', version: '1.4'
     compile 'org.slf4j:slf4j-api:1.7.21'
@@ -79,7 +79,7 @@ publishing {
     publications {
         MyPublication(MavenPublication) {
             from components.java
-            groupId 'ezlambda'
+            groupId 'com.bolyartech.ezlambda'
             artifactId 'ezlambda-server'
             version ezlambda_server_version
             artifact sourcesJar
