@@ -1,4 +1,4 @@
-package org.example.kforge
+package lalalambda.server
 
 import com.bolyartech.forge.server.handler.RouteHandler
 import com.bolyartech.forge.server.jetty.ForgeJetty

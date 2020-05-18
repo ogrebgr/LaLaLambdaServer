@@ -1,4 +1,4 @@
-package org.example.kforge
+package lalalambda.server
 
 import ch.qos.logback.classic.LoggerContext
 import ch.qos.logback.classic.joran.JoranConfigurator
@@ -11,13 +11,17 @@ import com.bolyartech.forge.server.jetty.ForgeJettyConfiguration
 import com.bolyartech.forge.server.jetty.ForgeJettyConfigurationLoaderFile
 import com.bolyartech.totoproverka3.server.main.MainModule
 import com.bolyartech.totoproverka3.server.main.NotFoundResponse
-import lalalambda.generic.AwsLambdaDispatcher
-import org.example.kforge.misc.InternalServerErrorResponse
+import lalalambda.aws.AwsLambdaDispatcher
+import lalalambda.server.misc.InternalServerErrorResponse
+import lalalambda.simple.SimpleLambdaDispatcher
 import org.slf4j.LoggerFactory
 import java.io.File
 import kotlin.system.exitProcess
 
-class La3Server constructor(private val awsDispatcher: AwsLambdaDispatcher) {
+class La3Server constructor(
+    private val awsDispatcher: AwsLambdaDispatcher,
+    private val disSimple: SimpleLambdaDispatcher
+) {
     private val logger = LoggerFactory.getLogger(this.javaClass)
 
     fun start() {
@@ -49,7 +53,7 @@ class La3Server constructor(private val awsDispatcher: AwsLambdaDispatcher) {
             }
 
             val server = Server(
-                MainModule(awsDispatcher),
+                MainModule(awsDispatcher, disSimple),
                 RouteHandler { NotFoundResponse() },
                 RouteHandler { InternalServerErrorResponse() })
 

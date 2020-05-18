@@ -1,4 +1,4 @@
-package org.example.kforge.misc
+package lalalambda.server.misc
 
 import org.slf4j.helpers.MessageFormatter
 
