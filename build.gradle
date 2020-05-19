@@ -16,7 +16,7 @@ plugins {
 }
 
 def kotlinPluginId = 'org.jetbrains.kotlin.jvm'
-final hasPlugin = project.getPlugins().hasPlugin(kotlinPluginId);
+final hasPlugin = project.getPlugins().hasPlugin(kotlinPluginId)
 if (hasPlugin) {
     final Plugin plugin = project.getPlugins().getPlugin(kotlinPluginId)
     println 'Plugin already applied - version ' + plugin.properties['kotlinPluginVersion']
@@ -26,7 +26,7 @@ if (hasPlugin) {
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.jfrog.bintray'
 ext {
-    ezlambda_server_version = '1.0.1'
+    ezlambda_server_version = '1.0.2'
 }
 
 group 'com.bolyartech.ezlambda'
@@ -43,7 +43,7 @@ repositories {
 
 dependencies {
 //    api project(':ezlambda')
-    api 'com.bolyartech.ezlambda:ezlambda:1.0.1'
+    api 'com.bolyartech.ezlambda:ezlambda:1.0.2'
     compile 'com.google.code.gson:gson:2.8.5'
     compile group: 'commons-cli', name: 'commons-cli', version: '1.4'
     compile 'org.slf4j:slf4j-api:1.7.21'
